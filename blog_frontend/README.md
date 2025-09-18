@@ -1,82 +1,53 @@
-# Lightweight React Template for KAVIA
+# Ocean Blog Frontend (React)
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+Minimalist personal blog UI following the "Ocean Professional" theme.
 
 ## Features
+- Browse all blog posts
+- Read individual posts
+- Admin: Add / Edit / Delete posts
+- Sidebar with About and Categories
+- Header and Footer with clean, minimalist styling
+- REST API client with placeholders
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+## Quick Start
+- Copy .env.example to .env and set REACT_APP_API_BASE_URL
+- Install deps and run:
+  - npm install
+  - npm start
 
-## Getting Started
+Open http://localhost:3000
 
-In the project directory, you can run:
+## API Integration
+This UI expects a REST backend (blog_database service or gateway):
+- GET    /posts
+- GET    /posts/:id
+- POST   /posts
+- PUT    /posts/:id
+- DELETE /posts/:id
+- GET    /categories (optional)
 
-### `npm start`
+Configure REACT_APP_API_BASE_URL in your .env.
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Theme
+Ocean Professional palette:
+- Primary: #374151
+- Secondary: #9CA3AF
+- Success: #10B981
+- Error: #EF4444
+- Background: #FFFFFF
+- Surface: #F9FAFB
+- Text: #111827
 
-### `npm test`
+All tokens are defined in src/index.css and applied consistently to keep a minimalist, whitespace-first aesthetic.
 
-Launches the test runner in interactive watch mode.
+## Structure
+- src/api/client.js: Fetch helpers and endpoints
+- src/components: UI components (Sidebar, PostCard, PostEditor)
+- src/pages: Home, Post, Admin, NotFound
+- src/App.js: Router and top-level layout (header, footer)
+- src/index.css: Theme and minimalist styles
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-## Customization
-
-### Colors
-
-The main brand colors are defined as CSS variables in `src/App.css`:
-
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
-
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Notes
+- No authentication is implemented; integrate your auth flow in Admin as needed.
+- Public interfaces are documented in code comments.

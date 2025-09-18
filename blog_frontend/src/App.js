@@ -1,48 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import './index.css';
+import Home from './pages/Home';
+import Post from './pages/Post';
+import Admin from './pages/Admin';
+import NotFound from './pages/NotFound';
 
 // PUBLIC_INTERFACE
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
+  /** Root application implementing minimalist Ocean Professional theme with:
+   *  - Sticky header with navigation
+   *  - Main layout: posts area + sidebar
+   *  - Footer
+   *  - Routes: Home (list), Post (read), Admin (CRUD)
+   */
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <BrowserRouter>
+      <header className="header">
+        <div className="header-inner">
+          <div className="brand" aria-label="Site brand">
+            <div className="brand-mark" />
+            <span>Ocean Blog</span>
+          </div>
+          <nav className="nav" aria-label="Primary Navigation">
+            <NavLink to="/" end className={({isActive}) => isActive ? 'active' : ''}>Home</NavLink>
+            <NavLink to="/admin" className={({isActive}) => isActive ? 'active' : ''}>Admin</NavLink>
+          </nav>
+        </div>
       </header>
-    </div>
+
+      <main className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/post/:id" element={<Post />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      <footer className="footer">
+        <div className="container" style={{padding: 0}}>
+          <div className="meta">© {new Date().getFullYear()} Ocean Blog · Minimalist & Focused</div>
+        </div>
+      </footer>
+    </BrowserRouter>
   );
 }
 
